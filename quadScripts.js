@@ -72,22 +72,38 @@ function QF() {
   graphQuad();
 }  // close QF
 
-function results() {
+function results() { 
   // finding vertex and displaying symline and yint results
   vX = -(b*1)/(2*a);
   vY = a*Math.pow(vX,2)+b*vX+c*1;
   vY = vY.toFixed(1);
   vX = vX.toFixed(1);
   context.beginPath();
-  context.arc(w/2+vX*k,h/2+vY*k,5,0,6.28);
+  context.arc(w/2+vX*k,h/2-vY*k,5,0,6.28);
   context.fill();
   $("#vertex").text("Vertex is at (" + vX+","+vY+")");
   $("#yInt").text("The y-intercept is at (0,"+c+")");
   $("#vertexForm").text("Vertex Form is y = "+a+"(x-"+vX+")^2 + "+vY);
 }  // close results()
 
+
+// y int circle
+  context.beginPath();
+  context.arc(w/2,h/2-c*k,5,0,6.28);
+  context.fill();
+
+  //sym line 
+  context.setLineDash([5, 10]);
+  context.beginPath();
+  context.moveTo(w/2+vX*k, 5);
+  context.lineTo(w/2+vX*k, h-5);
+  context.stroke();
+  context.setLineDash([0]);
+
+
 function solutions() {
 // qudratic formula
+
 $("#answers").fadeIn(1500);
 d = Math.pow(b*1,2)-4*a*c;
 if (d<0) {
@@ -103,7 +119,7 @@ x1 = x1.toFixed(3);
 x2 = Math.round(x2,3);
 $("#solution1").text("x = " + x1);
 $("#solution2").text("x = " + x2);
-context.fillStyle="Blue";
+context.fillStyle="sap";
 context.beginPath();
 context.arc(w/2,h/2,5,0,6.28);
 context.fill();
@@ -143,6 +159,7 @@ function graphQuad () {
     grid();
     graphQuad();
     results();
+    solutions();
   } //end resetCanvas
 
 
